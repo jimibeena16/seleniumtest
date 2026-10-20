@@ -1,0 +1,36 @@
+name: Selenium Tests
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build and Execute Tests
+        run: mvn clean install -U
+
+      - name: Upload TestNG Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestNG-Report-${{ github.run_number }}
+          path: test-output/
