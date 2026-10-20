@@ -17,7 +17,7 @@ public class SauceDemoTest {
 
         driver.get("https://www.saucedemo.com/");
 
-        driver.findElement(By.id("user-name"))
+        driver.findElement(By.id("user-name1"))
               .sendKeys("standard_user");
 
         driver.findElement(By.id("password"))
